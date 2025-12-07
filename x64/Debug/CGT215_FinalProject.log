@@ -1,0 +1,9 @@
+﻿  CallService.cpp
+C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Services\EngineServices\CallService\CallService.cpp(28,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Services\EngineServices\CallService\CallService.cpp(57,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  ServiceManager.cpp
+C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Services\ServiceManager.cpp(13,2): warning C4002: too many arguments for function-like macro invocation 'assert'
+C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Services\ServiceManager.cpp(26,2): warning C4002: too many arguments for function-like macro invocation 'assert'
+  bootstrapper.cpp
+  Generating Code...
+  CGT215_FinalProject.vcxproj -> C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\x64\Debug\CGT215_FinalProject.exe
