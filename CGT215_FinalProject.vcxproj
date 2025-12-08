@@ -108,7 +108,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-main.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-main.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Programming\Libraries\Cpp\SFML-3.0.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Services\EngineServices\ResourceService\ResourceService.cpp" />
     <ClCompile Include="Services\ServiceManager.cpp" />
     <ClCompile Include="Services\EngineServices\CallService\CallService.cpp" />
     <ClCompile Include="Services\EngineServices\AudioService\AudioService.cpp" />
@@ -136,6 +137,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObjects\GameObjectInterface.h" />
+    <ClInclude Include="Services\EngineServices\RenderService\RenderObject.h" />
+    <ClInclude Include="Services\EngineServices\ResourceService\ResourceService.h" />
     <ClInclude Include="Services\EngineServices\CallService\CallOrder.h" />
     <ClInclude Include="Services\EngineServices\CallService\CallService.h" />
     <ClInclude Include="Services\EngineServices\AudioService\AudioService.h" />

@@ -38,12 +38,10 @@ void CallService::Start()
 		}
 	}
 }
-
 void CallService::Shutdown()
 {
 
 }
-
 void CallService::Tick(float dt)
 {
 	// Get tick priorities
@@ -74,19 +72,16 @@ void CallService::SetServiceStartupPriority(IService* service, int priority)
 	// Add the provided service with to the service_startup_order CallOrder with the relevant priority
 	service_startup_order.Add(service, priority);
 }
-
 void CallService::SetServiceTickPriority(IService* service, int priority)
 {
 	// Add the provided service with to the service_tick_order CallOrder with the relevant priority
 	service_tick_order.Add(service, priority);
 }
-
 void CallService::SetObjectStartupPriority(IGameObject* game_object, int priority)
 {
 	// Add the provided service with to the object_startup_order CallOrder with the relevant priority
 	object_startup_order.Add(game_object, priority);
 }
-
 void CallService::SetObjectTickPriority(IGameObject* game_object, int priority)
 {
 	// Add the provided service with to the object_tick_order CallOrder with the relevant priority
