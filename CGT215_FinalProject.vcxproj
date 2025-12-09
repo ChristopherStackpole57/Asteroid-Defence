@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObjects\ARC.cpp" />
     <ClCompile Include="Services\EngineServices\ResourceService\ResourceService.cpp" />
     <ClCompile Include="Services\ServiceManager.cpp" />
     <ClCompile Include="Services\EngineServices\CallService\CallService.cpp" />
@@ -134,8 +135,10 @@
     <ClCompile Include="bootstrapper.cpp" />
     <ClCompile Include="Services\EngineServices\RenderService\RenderService.cpp" />
     <ClCompile Include="Services\EngineServices\InputService\InputService.cpp" />
+    <ClCompile Include="GameObjects\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameObjects\ARC.h" />
     <ClInclude Include="GameObjects\GameObjectInterface.h" />
     <ClInclude Include="Services\EngineServices\RenderService\RenderObject.h" />
     <ClInclude Include="Services\EngineServices\ResourceService\ResourceService.h" />
@@ -146,6 +149,7 @@
     <ClInclude Include="Services\EngineServices\InputService\InputService.h" />
     <ClInclude Include="Services\ServiceInterface.h" />
     <ClInclude Include="Services\ServiceManager.h" />
+    <ClInclude Include="GameObjects\World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">

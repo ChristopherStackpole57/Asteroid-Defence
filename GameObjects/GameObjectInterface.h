@@ -3,6 +3,10 @@
 #ifndef IGAMEOBJECT_H
 #define IGAMEOBJECT_H
 
+#include <SFML/Graphics.hpp>
+
+#include "Services/EngineServices/RenderService/RenderObject.h"
+
 class IGameObject
 {
 public:
@@ -11,6 +15,14 @@ public:
 	virtual void Start() = 0;
 	virtual void Shutdown() = 0;
 	virtual void Tick(float dt) {};
+
+	virtual sf::Vector2f GetPosition() = 0;
+	virtual void SetPosition() = 0;
+
+	virtual void Move() {};
+private:
+	sf::Vector2f position = sf::Vector2f(0, 0);
+	RenderObject render_object;
 };
 
 #endif

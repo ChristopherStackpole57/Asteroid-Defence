@@ -30,7 +30,7 @@ int main()
 	// Set startup priorities
 	call_service->SetServiceStartupPriority(render_service, 1);
 	call_service->SetServiceStartupPriority(input_service, 0);
-	call_service->SetServiceStartupPriority(resource_service, 0);
+	call_service->SetServiceStartupPriority(resource_service, 1);
 
 	// Set tick priorities
 
@@ -56,6 +56,20 @@ int main()
 
 	render_service->RegisterRenderObject(render_object);
 
+	// INPUT SERVICE TEST
+	// Register Input Event
+	auto pressed = []() {
+		std::cout << "key pressed" << std::endl;
+		};
+
+	auto released = []() {
+		std::cout << "key released" << std::endl;
+		};
+
+	input_service->RegisterInputListener(sf::Keyboard::Scancode::W, pressed);
+	input_service->RegisterInputListener(sf::Keyboard::Scancode::W, released, false);
+
+	// Tell Service Manager to run start on all services, this kicks off proper game execution
 	Services().Start();
 
 	while (render_service->WindowOpen())
@@ -68,7 +82,18 @@ int main()
 				// TODO: Move this to Services().Shutdown() -> requires writing ServiceManager.Shutdown
 				render_service->CloseWindow();
 			}
-			// Check if event is input, if so pass off to inputservice
+
+			// Input Service does not manage all types of events, so we only want to pass on the managed event types
+			if (
+				event.has_value() && (
+				event->is<sf::Event::KeyPressed>() ||
+				event->is<sf::Event::KeyReleased>() ||
+				event->is<sf::Event::MouseButtonPressed>() ||
+				event->is<sf::Event::MouseButtonReleased>()
+				))
+			{
+				input_service->ProcessEvent(event.value());
+			}
 		}
 
 		// Send off tick to services with registered time between frames
