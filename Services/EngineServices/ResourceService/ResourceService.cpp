@@ -6,12 +6,10 @@ void ResourceService::Start()
 {
 
 }
-
 void ResourceService::Shutdown()
 {
 
 }
-
 void ResourceService::Tick(float dt)
 {
 

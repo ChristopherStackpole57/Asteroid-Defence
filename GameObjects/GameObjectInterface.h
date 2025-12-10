@@ -17,10 +17,10 @@ public:
 	virtual void Tick(float dt) {};
 
 	virtual sf::Vector2f GetPosition() = 0;
-	virtual void SetPosition() = 0;
+	virtual void SetPosition(sf::Vector2f position) = 0;
 
 	virtual void Move() {};
-private:
+protected:
 	sf::Vector2f position = sf::Vector2f(0, 0);
 	RenderObject render_object;
 };

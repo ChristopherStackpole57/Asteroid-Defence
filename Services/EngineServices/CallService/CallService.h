@@ -30,4 +30,19 @@ private:
 	CallOrder<IGameObject*> object_tick_order;
 };
 
+// Startup Priority Categories
+constexpr int CLST_PRELOAD_CACHE = 1;
+constexpr int CLST_BASIC_SERVICE = 0;
+constexpr int CLST_DEPENDANT = -1;
+constexpr int CLST_BASIC_GAMEOBJECT = -2;
+
+// Tick Priority Categories
+constexpr int CLT_PREFRAME = 1;
+constexpr int CLT_BASIC = 0;
+constexpr int CLT_FRAMERENDER = -1;
+constexpr int CLT_POSTFRAME = -2;
+
+// Shutdown Priority Categories
+constexpr int CLSH_BASIC = 0;
+
 #endif

@@ -84,4 +84,7 @@
   <ItemGroup>
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Services\EngineServices\CallService\Org.txt" />
+  </ItemGroup>
 </Project>

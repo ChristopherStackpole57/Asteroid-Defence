@@ -1,0 +1,20 @@
+Startup Order:
+
+1 -> Pre-Load and Caching Services
+	Render Service, Resource Service
+0 -> Basic Service Level
+	Input Service
+-1 -> Dependant Services
+-2 -> Basic Game Object
+	World, ARC
+
+Tick order:
+
+1 -> Pre Frame
+	Input Service, Physics Service
+0 -> Basic Tick
+-1 -> Frame Render
+	Render Service
+-2 -> Post Frame
+
+Shutdown Order

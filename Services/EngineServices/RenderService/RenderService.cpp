@@ -1,5 +1,7 @@
 // Christopher Stackpole, 12/06/2025
 
+#include <iostream>
+
 #include "RenderService.h"
 
 void RenderService::Start()
@@ -10,7 +12,7 @@ void RenderService::Shutdown()
 {
 
 }
-void RenderService::Tick(float d)
+void RenderService::Tick(float dt)
 {
 	// Enter the primary rendering loop
 	// Start by setting the background color for the window
@@ -19,13 +21,13 @@ void RenderService::Tick(float d)
 	// Iterate through render_objects by layer and draw all active objects
 	for (auto& [_, objects] : render_objects)
 	{
-		for (RenderObject& object : objects)
+		for (RenderObject* object : objects)
 		{
 			// Ensure the object is enabled and non null
-			if (object.active)
+			if (object->active && object->drawable)
 			{
 				// Render the object onto the game window
-				window.draw(*object.drawable);
+				window.draw(*object->drawable);
 			}
 		}
 	}
@@ -63,7 +65,7 @@ void RenderService::CloseWindow()
 
 void RenderService::RegisterRenderObject(RenderObject& render_object)
 {
-	render_objects[render_object.layer].push_back(render_object);
+	render_objects[render_object.layer].push_back(&render_object);
 }
 void RenderService::UnregisterRenderObject(RenderObject& render_object)
 {

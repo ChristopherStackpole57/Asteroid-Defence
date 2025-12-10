@@ -157,6 +157,9 @@
       </SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Services\EngineServices\CallService\Org.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

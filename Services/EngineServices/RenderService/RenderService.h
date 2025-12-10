@@ -38,7 +38,7 @@ private:
 
 	sf::RenderWindow window;
 
-	std::map<int, std::vector<RenderObject>> render_objects;
+	std::map<int, std::vector<RenderObject*>> render_objects;
 };
 
 #endif
