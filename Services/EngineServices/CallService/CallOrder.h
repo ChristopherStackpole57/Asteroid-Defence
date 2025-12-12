@@ -21,7 +21,6 @@ public:
 	{
 		collections[priority].push_back(entry);
 	}
-
 	void Remove(T entry)
 	{
 		// Find entry in collections

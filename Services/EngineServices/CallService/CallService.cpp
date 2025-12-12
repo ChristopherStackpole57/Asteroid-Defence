@@ -44,6 +44,8 @@ void CallService::Shutdown()
 }
 void CallService::Tick(float dt)
 {
+	game_time += dt;
+
 	// Get tick priorities
 	std::vector<int> service_priorities = service_tick_order.GetPriorities();
 	std::vector<int> object_priorities = object_tick_order.GetPriorities();

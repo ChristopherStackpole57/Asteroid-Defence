@@ -15,17 +15,17 @@ void World::Start()
 	// Grab the correct graphic from the Resource Service
 	ResourceService* resource_service = Services().Get<ResourceService>();
 	sf::Texture& texture = resource_service->Load<sf::Texture>(path);
+	sf::Vector2u texture_size = texture.getSize();
 
 	// Update render object and register with Render Service
 	sprite = std::make_unique<sf::Sprite>(texture);
+	sprite->setOrigin(sf::Vector2f(texture_size.x / 2.0f, texture_size.y / 2.0f));
 	sprite->move(position);
 	
 	render_object.drawable = sprite.get();
 	
 	RenderService* render_service = Services().Get<RenderService>();
 	render_service->RegisterRenderObject(render_object);
-
-	// Finally, position the sprite
 }
 void World::Shutdown()
 {

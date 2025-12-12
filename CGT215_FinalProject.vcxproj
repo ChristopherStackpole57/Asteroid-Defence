@@ -102,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject;C:\Programming\Libraries\Cpp\SFML-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject;C:\Programming\Libraries\Cpp\SFML-3.0.2\include;C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Forwards;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -127,7 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Services\GameServices\AsteroidService\AsteroidService.cpp" />
+    <ClCompile Include="GameObjects\Cache.cpp" />
+    <ClCompile Include="GameObjects\Asteroid.cpp" />
+    <ClCompile Include="GameObjects\Bullet.cpp" />
     <ClCompile Include="GameObjects\ARC.cpp" />
+    <ClCompile Include="GameObjects\SCOOP.cpp" />
+    <ClCompile Include="Services\GameServices\PoolService\PoolService.cpp" />
     <ClCompile Include="Services\EngineServices\ResourceService\ResourceService.cpp" />
     <ClCompile Include="Services\ServiceManager.cpp" />
     <ClCompile Include="Services\EngineServices\CallService\CallService.cpp" />
@@ -136,10 +142,23 @@
     <ClCompile Include="Services\EngineServices\RenderService\RenderService.cpp" />
     <ClCompile Include="Services\EngineServices\InputService\InputService.cpp" />
     <ClCompile Include="GameObjects\World.cpp" />
+    <ClCompile Include="GameObjects\SWORD.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Services\GameServices\AsteroidService\AsteroidService.h" />
+    <ClInclude Include="GameObjects\Cache.h" />
+    <ClInclude Include="GameObjects\Asteroid.h" />
+    <ClInclude Include="GameObjects\Bullet.h" />
+    <ClInclude Include="Forwards\CallService.h" />
+    <ClInclude Include="Forwards\InputService.h" />
+    <ClInclude Include="Forwards\RenderService.h" />
+    <ClInclude Include="Forwards\ResourceService.h" />
+    <ClInclude Include="Forwards\ServiceControl.h" />
+    <ClInclude Include="Forwards\Services.h" />
     <ClInclude Include="GameObjects\ARC.h" />
     <ClInclude Include="GameObjects\GameObjectInterface.h" />
+    <ClInclude Include="GameObjects\SCOOP.h" />
+    <ClInclude Include="Services\GameServices\PoolService\PoolService.h" />
     <ClInclude Include="Services\EngineServices\RenderService\RenderObject.h" />
     <ClInclude Include="Services\EngineServices\ResourceService\ResourceService.h" />
     <ClInclude Include="Services\EngineServices\CallService\CallOrder.h" />
@@ -150,6 +169,7 @@
     <ClInclude Include="Services\ServiceInterface.h" />
     <ClInclude Include="Services\ServiceManager.h" />
     <ClInclude Include="GameObjects\World.h" />
+    <ClInclude Include="GameObjects\SWORD.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">

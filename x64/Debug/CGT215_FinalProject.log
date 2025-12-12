@@ -1,2 +1,5 @@
-﻿  World.cpp
+﻿  ARC.cpp
+  bootstrapper.cpp
+C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\bootstrapper.cpp(115,29): warning C4244: 'argument': conversion from '__int64' to 'float', possible loss of data
+  Generating Code...
   CGT215_FinalProject.vcxproj -> C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\x64\Debug\CGT215_FinalProject.exe
