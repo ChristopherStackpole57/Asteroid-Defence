@@ -4,11 +4,12 @@
 #define PHYSICS_SERVICE_H
 
 #include <memory>
-#include <vector>
+#include <deque>
 
 #include "Services/ServiceInterface.h"
 
 #include "Services/EngineServices/PhysicsService/Body.h"
+#include "Services/EngineServices/PhysicsService/OverlapFunctions.h"
 
 #include "GameObjects/GameObjectInterface.h"
 
@@ -21,7 +22,9 @@ public:
 
 	Body* RegisterPhysicsObject(IGameObject* game_object);
 private:
-	std::vector<std::unique_ptr<Body>> bodies;
+	bool TestOverlap(Body& a, Body& b);
+
+	std::deque<std::unique_ptr<Body>> bodies;
 };
 
 #endif

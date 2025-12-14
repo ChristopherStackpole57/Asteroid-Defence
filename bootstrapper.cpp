@@ -79,7 +79,7 @@ void SetGameRunPriorities()
 	call_service->SetServiceStartupPriority(pool_service, CLST_BASIC_SERVICE);
 	
 	// Set Tick Priorities
-	call_service->SetServiceTickPriority(asteroid_service, CLT_BASIC);
+	//call_service->SetServiceTickPriority(asteroid_service, CLT_BASIC);
 }
 
 int main()
@@ -104,6 +104,9 @@ int main()
 
 	SCOOP scoop;
 	scoop.SetPosition(sf::Vector2(300.f, 200.f));
+
+	Asteroid asteroid;
+	asteroid.SetPosition(sf::Vector2f(100.f, 100.f));
 
 	// Obtain pointers to services
 	CallService* call_service = Services().Get<CallService>();

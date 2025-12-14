@@ -36,6 +36,13 @@ void Laser::Start()
 	// Register sprite with render service
 	RenderService* render_service = Services().Get<RenderService>();
 	render_service->RegisterRenderObject(render_object);
+
+	// Update physics body collider
+	//std::cout << "body addr: " << body << std::endl;
+	if (body)
+	{
+		body->SetCollider(Rect{ {10.f, 10.f} });
+	}
 }
 void Laser::Shutdown()
 {
@@ -51,6 +58,7 @@ void Laser::Tick(float dt)
 	sf::Vector2u size = render_service->GetWindowSize();
 	if (position.x < 0 || position.x > size.x || position.y < 0 || position.y > size.y)
 	{
+		//std::cout << "laser should release" << std::endl;
 		PoolService* pool_service = Services().Get<PoolService>();
 		pool_service->Release(this);
 	}

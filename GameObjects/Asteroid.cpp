@@ -36,6 +36,9 @@ void Asteroid::Start()
 	// Register sprite with render service
 	RenderService* render_service = Services().Get<RenderService>();
 	render_service->RegisterRenderObject(render_object);
+
+	// Update physics body collider
+	body->SetCollider(Circle{ (float)texture_size.x });
 }
 void Asteroid::Shutdown()
 {

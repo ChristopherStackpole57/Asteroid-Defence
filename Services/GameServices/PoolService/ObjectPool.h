@@ -3,8 +3,10 @@
 #ifndef OBJECTPOOL_H
 #define OBJECTPOOL_H
 
+#include <deque>
 #include <iostream>
 #include <memory>
+#include <vector>
 
 #include "Services.h"
 
@@ -63,6 +65,8 @@ public:
 	};
 	void Release(T* obj)
 	{
+		//std::cout << "released: " << obj << std::endl;
+
 		free.push_back(obj);
 
 		if (IGameObject* game_obj = dynamic_cast<IGameObject*>(obj))
@@ -73,7 +77,7 @@ public:
 		}
 	}
 private:
-	std::vector<std::unique_ptr<T>> objects;
+	std::deque<std::unique_ptr<T>> objects;
 	std::vector<T*> free;
 };
 

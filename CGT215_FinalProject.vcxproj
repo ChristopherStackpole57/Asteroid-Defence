@@ -44,6 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -139,6 +140,7 @@
     <Text Include="Services\EngineServices\CallService\Org.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Services\EngineServices\PhysicsService\Collider.h" />
     <ClInclude Include="Forwards\CallService.h" />
     <ClInclude Include="Forwards\GameServices.h" />
     <ClInclude Include="Forwards\InputService.h" />
@@ -160,7 +162,6 @@
     <ClInclude Include="Services\EngineServices\CallService\CallService.h" />
     <ClInclude Include="Services\EngineServices\InputService\InputService.h" />
     <ClInclude Include="Services\EngineServices\PhysicsService\Body.h" />
-    <ClInclude Include="Services\EngineServices\PhysicsService\Bounds.h" />
     <ClInclude Include="Services\EngineServices\PhysicsService\PhysicsService.h" />
     <ClInclude Include="Services\EngineServices\RenderService\RenderObject.h" />
     <ClInclude Include="Services\EngineServices\RenderService\RenderService.h" />
@@ -186,7 +187,7 @@
     <ClCompile Include="Services\EngineServices\CallService\CallService.cpp" />
     <ClCompile Include="Services\EngineServices\InputService\InputService.cpp" />
     <ClCompile Include="Services\EngineServices\PhysicsService\Body.cpp" />
-    <ClCompile Include="Services\EngineServices\PhysicsService\Bounds.cpp" />
+    <ClCompile Include="Services\EngineServices\PhysicsService\OverlapFunctions.h" />
     <ClCompile Include="Services\EngineServices\PhysicsService\PhysicsService.cpp" />
     <ClCompile Include="Services\EngineServices\RenderService\RenderService.cpp" />
     <ClCompile Include="Services\EngineServices\ResourceService\ResourceService.cpp" />

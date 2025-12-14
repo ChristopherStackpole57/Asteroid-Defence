@@ -2,15 +2,6 @@
 
 #include "Body.h"
 
-Body::Body()
-{
-
-}
-Body::Body(sf::Vector2f position) : position(position)
-{
-
-}
-
 void Body::SetPosition(sf::Vector2f position)
 {
 	this->position = position;
@@ -43,4 +34,17 @@ void Body::SetActive(bool active)
 bool Body::GetActive()
 {
 	return active;
+}
+
+void Body::SetCollider(const Circle& collider)
+{
+	this->collider = collider;
+}
+void Body::SetCollider(const Rect& collider)
+{
+	this->collider = collider;
+}
+const Collider& Body::GetCollider()
+{
+	return collider;
 }

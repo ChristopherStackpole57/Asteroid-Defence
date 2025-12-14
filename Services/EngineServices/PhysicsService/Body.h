@@ -6,11 +6,12 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "Services/EngineServices/PhysicsService/Collider.h"
+
 class Body
 {
 public:
-	Body();
-	Body(sf::Vector2f position);
+	Body() : collider(Circle{ 0.f }) {};
 
 	void SetPosition(sf::Vector2f position);
 	sf::Vector2f GetPosition();
@@ -23,12 +24,18 @@ public:
 
 	void SetActive(bool active);
 	bool GetActive();
+
+	void SetCollider(const Circle& collider);
+	void SetCollider(const Rect& collider);
+	const Collider& GetCollider();
 private:
 	bool active = true;
 
 	sf::Vector2f position;
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;
+
+	Collider collider;
 };
 
 #endif

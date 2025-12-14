@@ -1,5 +1,7 @@
 // Christopher Stackpole, 12/13/2025
 
+#include <iostream>
+
 #include "PhysicsService.h"
 
 // Service Behavior
@@ -31,16 +33,54 @@ void PhysicsService::Tick(float dt)
 			body.SetAcceleration(sf::Vector2f());
 		}
 	}
+
+	// Test Pairs for Overlaps
+	for (int i = 0; i < bodies.size(); i++)
+	{
+		Body& a = *bodies[i];
+		if (!(a.GetActive()))
+			continue;
+
+		//std::cout << "testing: " << &a << std::endl;
+
+		for (int j = i + 1; j < bodies.size(); j++)
+		{
+			Body& b = *bodies[j];
+			if (!(b.GetActive()))
+				continue;
+			bool overlap = TestOverlap(a, b);
+			//bool overlap = false;
+			//std::cout << overlap << std::endl;
+
+			if (overlap)
+			{
+				std::cout << "found overlap" << std::endl;
+				// invoke overlap callbacks
+
+
+			}
+		}
+	}
 }
 
 // PhysicsService Behavior
 Body* PhysicsService::RegisterPhysicsObject(IGameObject* game_object)
 {
-	std::unique_ptr<Body> body = std::make_unique<Body>(
-		game_object->GetPosition()
-	);
+	std::unique_ptr<Body> body = std::make_unique<Body>();
 
 	Body* raw = body.get();
 	bodies.emplace_back(std::move(body));
 	return raw;
+}
+bool PhysicsService::TestOverlap(Body& a, Body& b)
+{
+	// Some secret c++ voodoo magic the interwebs gave me to go along with our std::variant collider
+	return std::visit(
+		[&](auto&& shape_a, auto&& shape_b)
+		{
+			return ResolveOverlap(a, shape_a, b, shape_b);
+		},
+		a.GetCollider(),
+		b.GetCollider()
+	);
 }
