@@ -105,8 +105,9 @@ int main()
 	SCOOP scoop;
 	scoop.SetPosition(sf::Vector2(300.f, 200.f));
 
-	Asteroid asteroid;
-	asteroid.SetPosition(sf::Vector2f(100.f, 100.f));
+	PoolService* pool_service = Services().Get<PoolService>();
+	Asteroid* asteroid = pool_service->Get<Asteroid>();
+	asteroid->SetPosition(sf::Vector2f(100.f, 100.f));
 
 	// Obtain pointers to services
 	CallService* call_service = Services().Get<CallService>();

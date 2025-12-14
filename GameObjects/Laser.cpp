@@ -38,7 +38,6 @@ void Laser::Start()
 	render_service->RegisterRenderObject(render_object);
 
 	// Update physics body collider
-	//std::cout << "body addr: " << body << std::endl;
 	if (body)
 	{
 		body->SetCollider(Rect{ {10.f, 10.f} });
@@ -46,7 +45,9 @@ void Laser::Start()
 }
 void Laser::Shutdown()
 {
-
+	// free self with pool service
+	PoolService* pool_service = Services().Get<PoolService>();
+	pool_service->Release(this);
 }
 void Laser::Tick(float dt)
 {

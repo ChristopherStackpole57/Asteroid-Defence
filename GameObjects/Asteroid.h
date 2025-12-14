@@ -7,6 +7,8 @@
 
 #include "GameObjects/GameObjectInterface.h"
 
+#include "GameObjects/Laser.h"
+
 class Asteroid : public IGameObject
 {
 public:
@@ -21,6 +23,8 @@ public:
 
 	sf::Vector2f GetSize() override;
 private:
+	float health = 100;
+
 	std::unique_ptr<sf::Sprite> sprite;
 	std::string path = "Resources/asteroid.bmp";
 };

@@ -41,23 +41,20 @@ void PhysicsService::Tick(float dt)
 		if (!(a.GetActive()))
 			continue;
 
-		//std::cout << "testing: " << &a << std::endl;
-
 		for (int j = i + 1; j < bodies.size(); j++)
 		{
 			Body& b = *bodies[j];
 			if (!(b.GetActive()))
 				continue;
 			bool overlap = TestOverlap(a, b);
-			//bool overlap = false;
-			//std::cout << overlap << std::endl;
 
 			if (overlap)
 			{
 				std::cout << "found overlap" << std::endl;
 				// invoke overlap callbacks
 
-
+				a.InvokeOverlap(b);
+				b.InvokeOverlap(a);
 			}
 		}
 	}
@@ -67,6 +64,7 @@ void PhysicsService::Tick(float dt)
 Body* PhysicsService::RegisterPhysicsObject(IGameObject* game_object)
 {
 	std::unique_ptr<Body> body = std::make_unique<Body>();
+	body->SetOwner(game_object);
 
 	Body* raw = body.get();
 	bodies.emplace_back(std::move(body));
