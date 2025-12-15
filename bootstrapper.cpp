@@ -1,6 +1,8 @@
 // Christopher Stackpole, 12/06/2025
 
 #include <chrono>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 #include <SFML/System.hpp>
@@ -65,6 +67,7 @@ void RegisterGameServices()
 {
 	Services().RegisterService<AsteroidService>();
 	Services().RegisterService<PoolService>();
+	Services().RegisterService<SwordService>();
 }
 void SetGameRunPriorities()
 {
@@ -73,10 +76,12 @@ void SetGameRunPriorities()
 
 	AsteroidService* asteroid_service = Services().Get<AsteroidService>();
 	PoolService* pool_service = Services().Get<PoolService>();
+	SwordService* sword_service = Services().Get<SwordService>();
 
 	// Set Startup Priorities
 	call_service->SetServiceStartupPriority(asteroid_service, CLST_BASIC_SERVICE);
 	call_service->SetServiceStartupPriority(pool_service, CLST_BASIC_SERVICE);
+	call_service->SetServiceStartupPriority(sword_service, CLST_BASIC_SERVICE);
 	
 	// Set Tick Priorities
 	call_service->SetServiceTickPriority(asteroid_service, CLT_BASIC);
@@ -84,6 +89,8 @@ void SetGameRunPriorities()
 
 int main()
 {
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
 	// Setup Game
 	RegisterEngineServices();
 	SetEngineRunPriorities();
@@ -99,15 +106,8 @@ int main()
 	ARC arc;
 	arc.SetPosition(sf::Vector2f(HALF_WIDTH, HALF_HEIGHT - 15));
 
-	SWORD sword;
-	sword.SetPosition(sf::Vector2f(1000.f, 400.f));
-
-	SCOOP scoop;
-	scoop.SetPosition(sf::Vector2(300.f, 200.f));
-
-	//PoolService* pool_service = Services().Get<PoolService>();
-	//Asteroid* asteroid = pool_service->Get<Asteroid>();
-	//asteroid->SetPosition(sf::Vector2f(100.f, 100.f));
+	//SCOOP scoop;
+	//scoop.SetPosition(sf::Vector2(300.f, 200.f));
 
 	// Obtain pointers to services
 	CallService* call_service = Services().Get<CallService>();

@@ -8,6 +8,9 @@
 
 #include "GameObjects/GameObjectInterface.h"
 
+constexpr float LASER_DAMAGE = 3.f;
+constexpr float LASER_SPEED = 500.f;
+
 class Laser : public IGameObject
 {
 public:

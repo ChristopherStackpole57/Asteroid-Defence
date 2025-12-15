@@ -16,13 +16,18 @@ Asteroid::Asteroid()
 // GameObject Behavior
 void Asteroid::Start()
 {
+	// Generate a random amount of health
+	ResetHealth();
+
 	// Get asteroid image from resource service
 	ResourceService* resource_service = Services().Get<ResourceService>();
 	sf::Texture& texture = resource_service->Load<sf::Texture>(path);
 	sf::Vector2u texture_size = texture.getSize();
+	tex_rad = (float)texture_size.x / 2.f;
 
 	// Create sprite and update origin
 	sprite = std::make_unique<sf::Sprite>(texture);
+	ResetSize();
 	sprite->setOrigin(
 		sf::Vector2f(
 			texture_size.x / 2.0f,
@@ -40,8 +45,6 @@ void Asteroid::Start()
 	// Update physics body collider
 	if (body)
 	{
-		body->SetCollider(Circle{ (float)texture_size.x / 2.f });
-		
 		// Bind overlap events
 		body->SetOnOverlap(
 			[this](Body& self, Body& other)
@@ -54,11 +57,15 @@ void Asteroid::Start()
 				{
 					laser->Shutdown();
 
-					this->health -= 50.f;
+					this->health -= LASER_DAMAGE;
 					if (this->health <= 0)
 					{
 						this->health = 100.f;
 						pool_service->Release(this);
+					}
+					else
+					{
+						this->ResetSize();
 					}
 				}
 				else if (World* world = dynamic_cast<World*>(other_game_obj))
@@ -112,4 +119,21 @@ sf::Vector2f Asteroid::GetSize()
 		);
 	}
 	return sf::Vector2f();
+}
+
+void Asteroid::ResetSize()
+{
+	float scale = health / ASTEROID_MAX_HEALTH;
+	if (sprite)
+	{
+		sprite->setScale({scale, scale});
+	}
+	if (body)
+	{
+		body->SetCollider(Circle{ tex_rad * scale });
+	}
+}
+void Asteroid::ResetHealth()
+{
+	health = std::rand() % (int)(ASTEROID_MAX_HEALTH - ASTEROID_MIN_GEN_HEALTH + 1) + ASTEROID_MIN_GEN_HEALTH;
 }

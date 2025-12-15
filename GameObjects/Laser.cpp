@@ -22,7 +22,7 @@ void Laser::Start()
 
 	// Create sprite and update origin
 	sprite = std::make_unique<sf::Sprite>(texture);
-	sprite->setScale(sf::Vector2f(0.5,0.5));
+	sprite->setScale(sf::Vector2f(0.25,0.25));
 	sprite->setOrigin(
 		sf::Vector2f(
 			texture_size.x / 2.0f,

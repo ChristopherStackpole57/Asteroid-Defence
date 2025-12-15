@@ -4,9 +4,10 @@
 
 #include "AsteroidService.h"
 
+#include "GameObjects/Asteroid.h"
+
 void AsteroidService::Start()
 {
-	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 }
 void AsteroidService::Shutdown()
 {
@@ -14,14 +15,25 @@ void AsteroidService::Shutdown()
 }
 void AsteroidService::Tick(float dt)
 {
-	int num = std::rand() % chance;
-	if (num == 1)
+	CallService* call_service = Services().Get<CallService>();
+
+	int decayed_chance = (int)(chance * std::exp(-1 * decay_factor * call_service->GetGameTime()));
+	if (decayed_chance % 100 == 0)
 	{
+		std::cout << decayed_chance << std::endl;
+	}
+	int num = std::rand() % (decayed_chance + 1);
+	if (num == 1)
+	{ 
 		// Generate asteroid
 		RenderService* render_service = Services().Get<RenderService>();
 		PoolService* pool_service = Services().Get<PoolService>();
 
 		Asteroid* asteroid = pool_service->Get<Asteroid>();
+		asteroids.insert(asteroid);
+
+		asteroid->ResetHealth();
+		asteroid->ResetSize();
 
 		int width = render_service->GetWindowSize().x;
 		int height = render_service->GetWindowSize().y;
@@ -43,4 +55,19 @@ void AsteroidService::Tick(float dt)
 		asteroid->SetPosition(pos);
 		asteroid->SetVelocity((sf::Vector2f(hw, hh) - pos).normalized() * asteroid_speed);
 	}
+}
+
+std::vector<Asteroid*> AsteroidService::GetAsteroids()
+{
+	std::vector<Asteroid*> active_asteroids;
+
+	for (Asteroid* asteroid : asteroids)
+	{
+		if (asteroid->GetActive())
+		{
+			active_asteroids.push_back(asteroid);
+		}
+	}
+
+	return active_asteroids;
 }

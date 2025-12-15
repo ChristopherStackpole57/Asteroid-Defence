@@ -70,7 +70,7 @@ void ARC::Start()
 					)
 				);
 				laser->SetRotation(this->sprite->getRotation());
-				laser->SetVelocity(sf::Vector2f(0, -500).rotatedBy(
+				laser->SetVelocity(sf::Vector2f(0, -1 * LASER_SPEED).rotatedBy(
 					this->sprite->getRotation()
 				));
 			}
