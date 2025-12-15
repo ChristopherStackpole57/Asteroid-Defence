@@ -70,7 +70,12 @@ void Asteroid::Start()
 				}
 				else if (World* world = dynamic_cast<World*>(other_game_obj))
 				{
-					world->Hit();
+					world->Hit(GetScaleAdjust() * ASTEROID_MAX_DAMAGE);
+					pool_service->Release(this);
+				}
+				else if (SWORD* sword = dynamic_cast<SWORD*>(other_game_obj))
+				{
+					sword->Hit(GetScaleAdjust() * ASTEROID_MAX_DAMAGE);
 					pool_service->Release(this);
 				}
 			}
@@ -121,9 +126,13 @@ sf::Vector2f Asteroid::GetSize()
 	return sf::Vector2f();
 }
 
+float Asteroid::GetScaleAdjust()
+{
+	return health / ASTEROID_MAX_HEALTH;
+}
 void Asteroid::ResetSize()
 {
-	float scale = health / ASTEROID_MAX_HEALTH;
+	float scale = GetScaleAdjust();
 	if (sprite)
 	{
 		sprite->setScale({scale, scale});

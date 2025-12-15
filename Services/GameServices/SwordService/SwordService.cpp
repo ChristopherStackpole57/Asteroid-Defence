@@ -12,9 +12,11 @@ void SwordService::Start()
 		[this]()
 		{
 			// Create SWORD and hold it in list
-			std::unique_ptr<SWORD> sword = std::make_unique<SWORD>();
-			SWORD* raw = sword.get();
-			swords.emplace_back(std::move(sword));
+			PoolService* pool_service = Services().Get<PoolService>();
+			SWORD* sword = pool_service->Get<SWORD>();
+			sword->ResetHealth();
+
+			swords.insert(sword);
 
 			this->UpdateSwordPositions();
 		}
@@ -35,11 +37,21 @@ void SwordService::UpdateSwordPositions()
 	sf::Vector2u size = render_service->GetWindowSize();
 	sf::Vector2f half{ size.x / 2.f, size.y / 2.f };
 
-	float delta_angle = 360.f / swords.size();
+	// Identify Active Swords
+	std::vector<SWORD*> active_swords;
+	for (SWORD* sword : swords)
+	{
+		if (sword->GetActive())
+		{
+			active_swords.push_back(sword);
+		}
+	}
+
+	float delta_angle = 360.f / active_swords.size();
 	sf::Vector2f offset{ 0.f, -300.f };
 
 	int index = 0;
-	for (auto&& sword : swords)
+	for (SWORD* sword : active_swords)
 	{
 		sf::Angle rot = sf::Angle(sf::degrees(delta_angle * (float)index));
 		sf::Vector2f rotated = offset.rotatedBy(rot);

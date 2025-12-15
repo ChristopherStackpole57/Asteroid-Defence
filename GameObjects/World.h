@@ -21,7 +21,7 @@ public:
 
 	sf::Vector2f GetSize() override;
 
-	void Hit();
+	void Hit(float damage);
 private:
 	std::unique_ptr<sf::Sprite> sprite;
 	std::string path = "Resources/planet.bmp";

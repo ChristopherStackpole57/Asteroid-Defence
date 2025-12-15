@@ -20,7 +20,7 @@ void AsteroidService::Tick(float dt)
 	int decayed_chance = (int)(chance * std::exp(-1 * decay_factor * call_service->GetGameTime()));
 	if (decayed_chance % 100 == 0)
 	{
-		std::cout << decayed_chance << std::endl;
+		//std::cout << decayed_chance << std::endl;
 	}
 	int num = std::rand() % (decayed_chance + 1);
 	if (num == 1)

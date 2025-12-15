@@ -10,10 +10,15 @@
 
 #include "Services.h"
 #include "Services/GameServices/AsteroidService/AsteroidService.h"
+#include "Services/GameServices/SwordService/SwordService.h"
 #include "Services/GameServices/PoolService/PoolService.h"
 
 #include "GameObjects/GameObjectInterface.h"
 #include "GameObjects/Asteroid.h"
+
+constexpr float SWORD_BASE_HEALTH = 25.f;
+constexpr float SWORD_BASE_FIRERATE = 20.f;
+constexpr float SWORD_SPRITE_SCALE = 0.25f;
 
 class SWORD : public IGameObject
 {
@@ -29,10 +34,15 @@ public:
 	void SetRotation(sf::Angle angle);
 	sf::Angle GetRotation();
 	sf::Vector2f GetSize() override;
+
+	void Hit(float damage);
+	void ResetHealth();
 private:
+	float health = SWORD_BASE_HEALTH;
+
 	bool debounce = false;
 	int shot_time = 0;
-	int fire_rate = 20;
+	int fire_rate = SWORD_BASE_FIRERATE;
 	float rangesq = 200000;
 	float laser_speed = 500.f;
 

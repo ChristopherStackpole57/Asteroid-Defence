@@ -10,8 +10,10 @@
 #include "GameObjects/GameObjectInterface.h"
 
 #include "GameObjects/Laser.h"
+#include "GameObjects/SWORD.h"
 #include "GameObjects/World.h"
 
+constexpr float ASTEROID_MAX_DAMAGE = 10.f;
 constexpr float ASTEROID_MAX_HEALTH = 100.f;
 constexpr float ASTEROID_MIN_GEN_HEALTH = 50.f;
 
@@ -29,6 +31,7 @@ public:
 
 	sf::Vector2f GetSize() override;
 
+	float GetScaleAdjust();
 	void ResetSize();
 	void ResetHealth();
 private:

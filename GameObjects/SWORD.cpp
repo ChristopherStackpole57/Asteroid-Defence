@@ -8,6 +8,9 @@ SWORD::SWORD()
 	CallService* call_service = Services().Get<CallService>();
 	call_service->SetObjectStartupPriority(this, CLST_BASIC_GAMEOBJECT);
 	call_service->SetObjectTickPriority(this, CLT_BASIC);
+
+	// create physics body
+	this->body = Services().Get<PhysicsService>()->RegisterPhysicsObject(this);
 }
 
 // GameObject Behavior
@@ -20,7 +23,7 @@ void SWORD::Start()
 
 	// Create sprite and register with render service
 	sprite = std::make_unique<sf::Sprite>(texture);
-	sprite->setScale({ 0.25f,0.25f });
+	sprite->setScale({ SWORD_SPRITE_SCALE, SWORD_SPRITE_SCALE });
 	sprite->setOrigin(
 		sf::Vector2f(
 			texture_size.x / 2.0f,
@@ -33,6 +36,14 @@ void SWORD::Start()
 
 	RenderService* render_service = Services().Get<RenderService>();
 	render_service->RegisterRenderObject(render_object);
+
+	if (body)
+	{
+		body->SetCollider(Rect{ sf::Vector2f{
+			(float)texture_size.x * SWORD_SPRITE_SCALE / 2.f,
+			(float)texture_size.y * SWORD_SPRITE_SCALE / 2.f,
+		} });
+	}
 }
 void SWORD::Shutdown()
 {
@@ -45,7 +56,7 @@ void SWORD::Tick(float dt)
 	if (debounce)
 	{
 		int curr_time = call_service->GetGameTime();
-		if ((curr_time - shot_time) >= (1000 / fire_rate))
+		if ((curr_time - shot_time) >= (1000.f / fire_rate))
 		{
 			debounce = false;
 		}
@@ -63,6 +74,11 @@ void SWORD::Tick(float dt)
 	sf::Vector2f size = sf::Vector2f{ (float)render_service->GetWindowSize().x, (float)render_service->GetWindowSize().y };
 
 	PoolService* pool_service = Services().Get<PoolService>();
+
+	// TODO: Aiming system will identify two asteroids, one to either side, and will shoot at both. These asteroids must sit
+	// within a certain angle range (~90-135 deg) so that the SWORD can't just shoot straight overheard or straight below
+	// should make a neat visual with the SWORDs basically working to protect each other instead of themselves or the planet
+	// This will also require me to add a second debounce and I'll probably want to modularize the shooting code
 
 	Asteroid* target_asteroid = nullptr;
 	float min_planet_dist = FLT_MAX;
@@ -106,7 +122,7 @@ void SWORD::Tick(float dt)
 	laser->SetVelocity(aim.normalized() * LASER_SPEED);
 }
 
-// SCOOP Behavior
+// SWORD Behavior
 void SWORD::SetPosition(sf::Vector2f position)
 {
 	this->position = position;
@@ -150,4 +166,19 @@ sf::Vector2f SWORD::GetSize()
 		);
 	}
 	return sf::Vector2f();
+}
+
+void SWORD::Hit(float damage)
+{
+	health -= damage;
+	if (health <= 0)
+	{
+		std::cout << "kill sword" << std::endl;
+		Services().Get<PoolService>()->Release(this);
+		Services().Get<SwordService>()->UpdateSwordPositions();
+	}
+}
+void SWORD::ResetHealth()
+{
+	health = SWORD_BASE_HEALTH;
 }

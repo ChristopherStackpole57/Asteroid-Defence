@@ -79,9 +79,9 @@ sf::Vector2f World::GetSize()
 	return sf::Vector2f();
 }
 
-void World::Hit()
+void World::Hit(float damage)
 {
-	health -= 10.f;
+	health -= damage;
 	if (health <= 0)
 	{
 		std::cout << "game over" << std::endl;
