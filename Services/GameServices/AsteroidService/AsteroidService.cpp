@@ -17,7 +17,7 @@ void AsteroidService::Tick(float dt)
 {
 	CallService* call_service = Services().Get<CallService>();
 
-	int decayed_chance = (int)(chance * std::exp(-1 * decay_factor * call_service->GetGameTime()));
+	int decayed_chance = (int)(ASTEROID_SPAWN_CHANCE * std::exp(-1 * ASTEROID_SPAWN_DECAY_FACTOR * call_service->GetGameTime()));
 	if (decayed_chance % 100 == 0)
 	{
 		//std::cout << decayed_chance << std::endl;
@@ -53,7 +53,7 @@ void AsteroidService::Tick(float dt)
 		pos += sf::Vector2f(hw, hh);
 
 		asteroid->SetPosition(pos);
-		asteroid->SetVelocity((sf::Vector2f(hw, hh) - pos).normalized() * asteroid_speed);
+		asteroid->SetVelocity((sf::Vector2f(hw, hh) - pos).normalized() * ASTEROID_SPEED);
 	}
 }
 

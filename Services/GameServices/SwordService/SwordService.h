@@ -11,6 +11,7 @@
 #include "Services.h"
 
 constexpr float SWORD_COST = 30.f;
+constexpr float SWORD_COUNT_COST_GROWTH = 0.75;
 
 constexpr float SWORD_BASE_MODIFIER_DAMAGE = 1.f;
 constexpr float SWORD_BASE_MODIFIER_FIRERATE = 1.f;

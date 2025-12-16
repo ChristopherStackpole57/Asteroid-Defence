@@ -7,6 +7,13 @@
 void RenderService::Start()
 {
 	window = sf::RenderWindow(sf::VideoMode(window_size), window_title);
+	sf::View view;
+	view.setSize({
+		static_cast<float>(window.getSize().x),
+		static_cast<float>(window.getSize().y)
+	});
+	view.setCenter(view.getSize() * 0.5f);
+	window.setView(view);
 }
 void RenderService::Shutdown()
 {

@@ -18,9 +18,19 @@ void SwordService::Start()
 		[this]()
 		{
 			// ensure player has enough ore
-			if (ore < SWORD_COST)
+			// Identify Active Swords
+			int count = 0;
+			for (SWORD* sword : swords)
 			{
-				std::cout << "insufficient ore" << std::endl;
+				if (sword->GetActive())
+				{
+					count++;
+				}
+			}
+			float cost = SWORD_COST + (SWORD_COST * SWORD_COUNT_COST_GROWTH * count);
+			if (ore < cost)
+			{
+				std::cout << "required: " << cost << ", have: " << ore << std::endl;
 				return;
 			}
 
@@ -80,12 +90,22 @@ void SwordService::Tick(float dt)
 	sf::Color can_afford{ 255, 255, 255, 255 };
 
 	// Check if can afford buying sword
-	sf::Color color = (ore < SWORD_COST) ? cant_afford : can_afford;
+	// Identify Active Swords
+	int count = 0;
+	for (SWORD* sword : swords)
+	{
+		if (sword->GetActive())
+		{
+			count++;
+		}
+	}
+	float upgrade_cost = SWORD_COST + (SWORD_COST * SWORD_COUNT_COST_GROWTH * count);
+	sf::Color color = (ore < upgrade_cost) ? cant_afford : can_afford;
 	icon_sword->setColor(color);
 
 	// Check if can afford buying damage upgrade
 	int num_upgrades = (this->damage_modifier - SWORD_BASE_MODIFIER_DAMAGE) / SWORD_UPGRADE_INCREMENT_DAMAGE;
-	float upgrade_cost = SWORD_UPGRADE_BASE_DAMAGE_COST + SWORD_UPGRADE_COST_GROWTH * num_upgrades;
+	upgrade_cost = SWORD_UPGRADE_BASE_DAMAGE_COST + SWORD_UPGRADE_COST_GROWTH * num_upgrades;
 	color = (ore < upgrade_cost) ? cant_afford : can_afford;
 	icon_damage->setColor(color);
 
