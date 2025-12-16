@@ -73,6 +73,7 @@ void ARC::Start()
 				laser->SetVelocity(sf::Vector2f(0, -1 * LASER_SPEED).rotatedBy(
 					this->sprite->getRotation()
 				));
+				laser->SetDamage(LASER_DAMAGE_ARC);
 			}
 			else
 			{
@@ -82,11 +83,11 @@ void ARC::Start()
 		};
 
 	InputService* input_service = Services().Get<InputService>();
-	input_service->RegisterInputListener(sf::Keyboard::Scancode::A, left_turn_press);
-	input_service->RegisterInputListener(sf::Keyboard::Scancode::A, left_turn_release, false);
-	input_service->RegisterInputListener(sf::Keyboard::Scancode::D, right_turn_press);
-	input_service->RegisterInputListener(sf::Keyboard::Scancode::D, right_turn_release, false);
-	input_service->RegisterInputListener(sf::Keyboard::Scancode::W, shoot_press);
+	input_service->RegisterInputListener(ARC_TURN_CCW, left_turn_press);
+	input_service->RegisterInputListener(ARC_TURN_CCW, left_turn_release, false);
+	input_service->RegisterInputListener(ARC_TURN_CW, right_turn_press);
+	input_service->RegisterInputListener(ARC_TURN_CW, right_turn_release, false);
+	input_service->RegisterInputListener(ARC_SHOOT, shoot_press);
 }
 void ARC::Shutdown()
 {

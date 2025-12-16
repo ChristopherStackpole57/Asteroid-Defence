@@ -8,10 +8,18 @@ void SwordService::Start()
 {
 	// Bind Callback to create starts
 	InputService* input_service = Services().Get<InputService>();
-	input_service->RegisterInputListener(sf::Keyboard::Scancode::S,
+	input_service->RegisterInputListener(SPAWN_SWORD,
 		[this]()
 		{
+			// ensure player has enough ore
+			if (ore < SWORD_COST)
+			{
+				std::cout << "insufficient ore" << std::endl;
+				return;
+			}
+
 			// Create SWORD and hold it in list
+			ore -= SWORD_COST;
 			PoolService* pool_service = Services().Get<PoolService>();
 			SWORD* sword = pool_service->Get<SWORD>();
 			sword->ResetHealth();
@@ -31,6 +39,10 @@ void SwordService::Tick(float dt)
 
 }
 
+void SwordService::AddOreAmount(float amount)
+{
+	ore += amount;
+}
 void SwordService::UpdateSwordPositions()
 {
 	RenderService* render_service = Services().Get<RenderService>();

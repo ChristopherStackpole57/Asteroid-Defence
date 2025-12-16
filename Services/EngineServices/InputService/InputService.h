@@ -14,6 +14,13 @@
 
 #include "Services/ServiceInterface.h"
 
+constexpr sf::Keyboard::Scancode ARC_TURN_CCW = sf::Keyboard::Scancode::A;
+constexpr sf::Keyboard::Scancode ARC_TURN_CW = sf::Keyboard::Scancode::D;
+constexpr sf::Keyboard::Scancode ARC_SHOOT = sf::Keyboard::Scancode::W;
+constexpr sf::Keyboard::Scancode SPAWN_SWORD = sf::Keyboard::Scancode::Q;
+constexpr sf::Keyboard::Scancode SPAWN_SCOOP = sf::Keyboard::Scancode::E;
+constexpr sf::Keyboard::Scancode UPRGRADE_SWORD = sf::Keyboard::Scancode::S;
+
 using ISCallback = std::function<void()>;
 using ISMCallback = std::function<void(sf::Vector2i position)>;
 

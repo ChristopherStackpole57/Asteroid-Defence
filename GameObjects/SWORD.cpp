@@ -120,6 +120,7 @@ void SWORD::Tick(float dt)
 		std::atan2(aim.y, aim.x) + 3.141592 / 2
 	)));
 	laser->SetVelocity(aim.normalized() * LASER_SPEED);
+	laser->SetDamage(LASER_DAMAGE_SWORD);
 }
 
 // SWORD Behavior

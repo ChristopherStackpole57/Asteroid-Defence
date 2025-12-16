@@ -2,6 +2,8 @@
 
 #include "Asteroid.h"
 
+#include "GameServices.h"
+
 Asteroid::Asteroid()
 {
 	// Register self with call service
@@ -57,10 +59,13 @@ void Asteroid::Start()
 				{
 					laser->Shutdown();
 
-					this->health -= LASER_DAMAGE;
+					this->health -= laser->GetDamage();
 					if (this->health <= 0)
 					{
-						this->health = 100.f;
+						SwordService* sword_service = Services().Get<SwordService>();
+						sword_service->AddOreAmount(ASTEROID_BASE_ORE);
+
+						//this->health = 100.f;
 						pool_service->Release(this);
 					}
 					else
@@ -70,6 +75,9 @@ void Asteroid::Start()
 				}
 				else if (World* world = dynamic_cast<World*>(other_game_obj))
 				{
+					SwordService* sword_service = Services().Get<SwordService>();
+					sword_service->AddOreAmount(ASTEROID_BASE_ORE);
+
 					world->Hit(GetScaleAdjust() * ASTEROID_MAX_DAMAGE);
 					pool_service->Release(this);
 				}

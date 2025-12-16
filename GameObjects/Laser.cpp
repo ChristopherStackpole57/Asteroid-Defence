@@ -101,3 +101,12 @@ void Laser::SetRotation(sf::Angle angle)
 		sprite->setRotation(angle);
 	}
 }
+
+void Laser::SetDamage(float amount)
+{
+	damage = amount;
+}
+float Laser::GetDamage()
+{
+	return damage;
+}

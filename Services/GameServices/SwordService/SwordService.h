@@ -10,7 +10,7 @@
 #include "ServiceControl.h"
 #include "Services.h"
 
-#include "InputService.h"
+constexpr float SWORD_COST = 10.f;
 
 class SWORD;
 class SwordService : public IService
@@ -21,7 +21,9 @@ public:
 	void Tick(float dt) override;
 
 	void UpdateSwordPositions();
+	void AddOreAmount(float amount);
 private:
+	float ore = 0.f;
 	std::set<SWORD*> swords;
 };
 

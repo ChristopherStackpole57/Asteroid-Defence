@@ -16,6 +16,7 @@
 constexpr float ASTEROID_MAX_DAMAGE = 10.f;
 constexpr float ASTEROID_MAX_HEALTH = 100.f;
 constexpr float ASTEROID_MIN_GEN_HEALTH = 50.f;
+constexpr float ASTEROID_BASE_ORE = 5.f;
 
 class Asteroid : public IGameObject
 {
