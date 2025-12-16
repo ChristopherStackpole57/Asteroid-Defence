@@ -5,7 +5,7 @@
 
 #include <memory>
 #include <set>
-#include <vector>
+#include <deque>
 
 #include "ServiceControl.h"
 #include "Services.h"
@@ -38,6 +38,19 @@ private:
 	float firerate_modifier = SWORD_BASE_MODIFIER_FIRERATE;
 	float ore = 0.f;
 	std::set<SWORD*> swords;
+
+	// Upgrade icons
+	std::string icon_sword_path = "Resources/icon_sword.bmp";
+	std::string icon_damage_path = "Resources/icon_damage.bmp";
+	std::string icon_firerate_path = "Resources/icon_firerate.bmp";
+
+	std::unique_ptr<sf::Sprite> icon_sword;
+	std::unique_ptr<sf::Sprite> icon_damage;
+	std::unique_ptr<sf::Sprite> icon_firerate;
+
+	std::deque<RenderObject> render_objects;
+
+	std::unique_ptr<sf::Sprite> MakeSprite(std::string path, sf::Vector2f position);
 };
 
 #endif

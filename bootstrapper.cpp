@@ -85,6 +85,7 @@ void SetGameRunPriorities()
 	
 	// Set Tick Priorities
 	call_service->SetServiceTickPriority(asteroid_service, CLT_BASIC);
+	call_service->SetServiceTickPriority(sword_service, CLT_PREFRAME);
 }
 
 int main()
@@ -105,9 +106,6 @@ int main()
 
 	ARC arc;
 	arc.SetPosition(sf::Vector2f(HALF_WIDTH, HALF_HEIGHT - 15));
-
-	//SCOOP scoop;
-	//scoop.SetPosition(sf::Vector2(300.f, 200.f));
 
 	// Obtain pointers to services
 	CallService* call_service = Services().Get<CallService>();

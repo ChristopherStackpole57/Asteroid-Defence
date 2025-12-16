@@ -6,6 +6,12 @@
 
 void SwordService::Start()
 {
+	// Create render objects
+	float y = Services().Get<RenderService>()->GetWindowSize().y - 64.f;
+	icon_sword = MakeSprite(icon_sword_path, sf::Vector2f{ 64.f, y });
+	icon_damage = MakeSprite(icon_damage_path, sf::Vector2f{ 164.f, y });
+	icon_firerate = MakeSprite(icon_firerate_path, sf::Vector2f{ 256.f, y });
+
 	// Bind Callback to create swords
 	InputService* input_service = Services().Get<InputService>();
 	input_service->RegisterInputListener(SPAWN_SWORD,
@@ -70,7 +76,24 @@ void SwordService::Shutdown()
 }
 void SwordService::Tick(float dt)
 {
+	sf::Color cant_afford{ 100, 100, 100, 255 };
+	sf::Color can_afford{ 255, 255, 255, 255 };
 
+	// Check if can afford buying sword
+	sf::Color color = (ore < SWORD_COST) ? cant_afford : can_afford;
+	icon_sword->setColor(color);
+
+	// Check if can afford buying damage upgrade
+	int num_upgrades = (this->damage_modifier - SWORD_BASE_MODIFIER_DAMAGE) / SWORD_UPGRADE_INCREMENT_DAMAGE;
+	float upgrade_cost = SWORD_UPGRADE_BASE_DAMAGE_COST + SWORD_UPGRADE_COST_GROWTH * num_upgrades;
+	color = (ore < upgrade_cost) ? cant_afford : can_afford;
+	icon_damage->setColor(color);
+
+	// Check if can afford buying firerate upgrade
+	num_upgrades = (this->firerate_modifier - SWORD_BASE_MODIFIER_FIRERATE) / SWORD_UPGRADE_INCREMENT_FIRERATE;
+	upgrade_cost = SWORD_UPGRADE_BASE_FIRERATE_COST + SWORD_UPGRADE_COST_GROWTH * num_upgrades;
+	color = (ore < upgrade_cost) ? cant_afford : can_afford;
+	icon_firerate->setColor(color);
 }
 
 void SwordService::AddOreAmount(float amount)
@@ -115,4 +138,28 @@ float SwordService::GetDamageModifier()
 float SwordService::GetFirerateModifier()
 {
 	return firerate_modifier;
+}
+
+std::unique_ptr<sf::Sprite> SwordService::MakeSprite(std::string path, sf::Vector2f position)
+{
+	RenderService* render_service = Services().Get<RenderService>();
+	ResourceService* resource_service = Services().Get<ResourceService>();
+
+	sf::Texture& texture = resource_service->Load<sf::Texture>(path);
+	sf::Vector2u size = texture.getSize();
+
+	std::unique_ptr<sf::Sprite> sprite = std::make_unique<sf::Sprite>(texture);
+	sprite->setOrigin(sf::Vector2f{ size.x / 2.f, size.y / 2.f });
+	sprite->move(position);
+
+	RenderObject icon_render_object;
+	icon_render_object.drawable = sprite.get();
+	icon_render_object.layer = 1;
+
+	// getting stable reference to avoid UB
+	render_objects.emplace_back(icon_render_object);
+	RenderObject& obj_ref = render_objects.back();
+	Services().Get<RenderService>()->RegisterRenderObject(obj_ref);
+
+	return sprite;
 }

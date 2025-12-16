@@ -32,6 +32,9 @@ bool ResourceService::LoadResource(sf::Texture& texture, const std::string& path
 		return false;
 	}
 
+	texture.setRepeated(false);
+	texture.setSmooth(false);
+
 	return true;
 }
 

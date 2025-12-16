@@ -5,6 +5,8 @@ C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Service
 C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\GameObjects\SWORD.h(45,18): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
   (compiling source file 'Services/GameServices/SwordService/SwordService.cpp')
   
-C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Services\GameServices\SwordService\SwordService.cpp(38,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Services\GameServices\SwordService\SwordService.cpp(54,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Services\GameServices\SwordService\SwordService.cpp(44,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Services\GameServices\SwordService\SwordService.cpp(60,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Services\GameServices\SwordService\SwordService.cpp(87,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\CGT215_FinalProject\Services\GameServices\SwordService\SwordService.cpp(93,74): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   CGT215_FinalProject.vcxproj -> C:\Programming\Projects\Cpp\VS22\CGT215_FinalProject\x64\Debug\CGT215_FinalProject.exe
